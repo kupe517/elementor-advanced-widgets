@@ -22,15 +22,15 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Any custom code should go inside Plugin Class in the plugin.php file.
  * @since 1.2.0
  */
-final class Elementor_Hello_World {
+final class Elementor_Advanced_Widgets {
 
 	/**
 	 * Plugin Version
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 * @var string The plugin version.
 	 */
-	const VERSION = '1.2.0';
+	const VERSION = '1.0.0';
 
 	/**
 	 * Minimum Elementor Version
@@ -184,5 +184,5 @@ final class Elementor_Hello_World {
 	}
 }
 
-// Instantiate Elementor_Hello_World.
-new Elementor_Hello_World();
+// Instantiate Elementor_Advanced_Widgets.
+new Elementor_Advanced_Widgets();

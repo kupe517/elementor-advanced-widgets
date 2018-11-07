@@ -60,6 +60,7 @@ class Plugin {
 	private function include_widgets_files() {
 		require_once( __DIR__ . '/widgets/hello-world.php' );
 		require_once( __DIR__ . '/widgets/inline-editing.php' );
+		require_once( __DIR__ . '/widgets/team-member.php' );
 	}
 
 	/**
@@ -77,6 +78,7 @@ class Plugin {
 		// Register Widgets
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Hello_World() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Inline_Editing() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Team_Member() );
 	}
 
 	/**
