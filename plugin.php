@@ -61,6 +61,7 @@ class Plugin {
 		require_once( __DIR__ . '/widgets/hello-world.php' );
 		require_once( __DIR__ . '/widgets/inline-editing.php' );
 		require_once( __DIR__ . '/widgets/team-member.php' );
+		require_once( __DIR__ . '/widgets/portfolio-item.php' );
 	}
 
 	/**
@@ -79,6 +80,13 @@ class Plugin {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Hello_World() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Inline_Editing() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Team_Member() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Portfolio_Item() );
+	}
+
+	public function widget_styles() {
+		wp_enqueue_style(
+			'elementor-advanced-widgets', ELEMENTOR_ADVANCED_WIDGETS_URL . 'assets/css/frontend.css', [], ELEMENTOR_ADVANCED_WIDGETS_VER
+		);
 	}
 
 	/**
@@ -91,12 +99,15 @@ class Plugin {
 	 */
 	public function __construct() {
 
+		add_action( 'elementor/frontend/after_register_scripts', [ $this, 'widget_styles' ] );
+
 		// Register widget scripts
 		add_action( 'elementor/frontend/after_register_scripts', [ $this, 'widget_scripts' ] );
 
 		// Register widgets
 		add_action( 'elementor/widgets/widgets_registered', [ $this, 'register_widgets' ] );
 	}
+
 }
 
 // Instantiate Plugin Class

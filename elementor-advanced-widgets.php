@@ -11,6 +11,9 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+define( 'ELEMENTOR_ADVANCED_WIDGETS_URL', plugins_url( '/', __FILE__ ) );
+define( 'ELEMENTOR_ADVANCED_WIDGETS_VER', '1.0.0' );
+
 /**
  * Main Elemntor Advanced Widgets Class
  *
