@@ -345,37 +345,25 @@ class Portfolio_Item extends Widget_Base {
 		$nofollow = $settings['link']['nofollow'] ? ' rel="nofollow"' : '';
 		?>
 
-		<div class="c-media c-portfolio-item">
-			<div class="c-media__copy">
-
-				<?php if ( 'yes' === $settings['show_caption'] ) { ?>
-				<div <?php echo $this->get_render_attribute_string( 'caption' ); ?>>
-					<?php echo $settings['caption']; ?>
+		<div class="portfolio-item">
+			<div class="portfolio-item-content">
+				<div class="portfolio-item-content__bg" data-parallax='{"y" : -100}'></div>
+				<div class="portfolio-item-content__image">
+					<a href="<?php echo $settings['link']['url']; ?>" <?php echo $target .  $nofollow ?> class="c-media__primary">
+						<img src="<?php echo $settings['primary_image']['url']; ?>">
+					</a>
 				</div>
-				<?php } ?>
+			</div>
 
-				<div class="c-excerpt__headline">
+			<div class="portfolio-item-copy">
 					<?php
 						$title_html = sprintf( '<%1$s %2$s>%3$s</%1$s>', $settings['headline_tag'], $this->get_render_attribute_string( 'headline' ), $settings['headline'] );
 						echo $title_html;
 					?>
-				</div>
-
-				<div <?php echo $this->get_render_attribute_string( 'description' ); ?>>
-					<?php echo $settings['description']; ?>
-				</div>
+				<?php echo $settings['description']; ?>
 				<a href="<?php echo $settings['link']['url']; ?>" <?php echo $target .  $nofollow ?> <?php echo $this->get_render_attribute_string( 'button_text' ); ?>>
 					<?php echo $settings['button_text']; ?>
 				</a>
-			</div>
-			<div class="c-media__inner-grid">
-				<a href="<?php echo $settings['link']['url']; ?>" <?php echo $target .  $nofollow ?> class="c-media__primary">
-					<img src="<?php echo $settings['primary_image']['url']; ?>">
-				</a>
-				<div class="c-media__secondary">
-					<img src="<?php echo $settings['secondary_image']['url']; ?>">
-				</div>
-				<div class="c-media__grid"></div>
 			</div>
 		</div>
 		<?php
@@ -401,37 +389,28 @@ class Portfolio_Item extends Widget_Base {
 		var target = settings.link.is_external ? ' target="_blank"' : '';
 		var nofollow = settings.link.nofollow ? ' rel="nofollow"' : '';
 		#>
-		<div class="c-media c-portfolio-item">
-			<div class="c-media__copy">
-
-				<# if ( 'yes' === settings.show_caption ) { #>
-				<div class="c-excerpt__caption h5">
-					{{{ settings.caption }}}
+		<div class="portfolio-item">
+			<div class="portfolio-item-content">
+				<div class="portfolio-item-content__bg" data-parallax='{"y" : -100}'></div>
+				<div class="portfolio-item-content__image">
+					<a href="{{ settings.link.url }}"{{ target }}{{ nofollow }} class="c-media__primary">
+						<img src="{{{ settings.primary_image.url }}}">
+					</a>
 				</div>
-				<# } #>
+			</div>
 
-				<div class="c-excerpt__headline">
+			<div class="portfolio-item-copy">
+				<h2>
 					<#
 						var title_html = '<' + settings.headline_tag  + ' ' + view.getRenderAttributeString( 'headline' ) + '>' + settings.headline + '</' + settings.headline_tag + '>';
 
 						print( title_html );
 					#>
-				</div>
-				<div class="c-media__description">
-					<div {{{ view.getRenderAttributeString( 'description' ) }}}>{{{ settings.description }}}</div>
-				</div>
+				</h2>
+				<p {{{ view.getRenderAttributeString( 'description' ) }}}>{{{ settings.description }}}</p>
 				<a href="{{ settings.link.url }}"{{ target }}{{ nofollow }} class="button">
 					{{{ settings.button_text }}}
 				</a>
-			</div>
-			<div class="c-media__inner-grid">
-				<a href="{{ settings.link.url }}"{{ target }}{{ nofollow }} class="c-media__primary">
-					<img src="{{{ settings.primary_image.url }}}">
-				</a>
-				<div class="c-media__secondary">
-					<img src="{{{ settings.secondary_image.url }}}">
-				</div>
-				<div class="c-media__grid"></div>
 			</div>
 		</div>
 		<?php

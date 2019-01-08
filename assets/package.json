@@ -1,0 +1,14 @@
+{
+  "name": "elementor-advanced-widgets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"start": "npm run watch-css",
+    "build-css": "node-sass --watch scss -o css | postcss css/frontend.css -u autoprefixer -r",
+    "watch-css": "nodemon -e scss -x 'npm run build-css'"
+  },
+  "author": "Brian Kuperman",
+  "license": "ISC"
+}
