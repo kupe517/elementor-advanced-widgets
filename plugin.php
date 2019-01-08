@@ -99,7 +99,7 @@ class Plugin {
 	 */
 	public function __construct() {
 
-		add_action( 'elementor/frontend/after_register_scripts', [ $this, 'widget_styles' ] );
+		add_action( 'elementor/frontend/after_enqueue_styles', [ $this, 'widget_styles' ] );
 
 		// Register widget scripts
 		add_action( 'elementor/frontend/after_register_scripts', [ $this, 'widget_scripts' ] );

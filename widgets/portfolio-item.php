@@ -101,7 +101,7 @@ class Portfolio_Item extends Widget_Base {
 						'icon' => 'fa fa-align-right',
 					],
 				],
-				'prefix_class' => 'c-media%s-align-',
+				'prefix_class' => 'portfolio-item%s-align-',
 				'default' => '',
 			]
 		);
@@ -114,47 +114,6 @@ class Portfolio_Item extends Widget_Base {
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
 				],
-			]
-		);
-
-		$this->add_control(
-			'secondary_image',
-			[
-				'label' => __( 'Background Image', 'elementor-advanced-widgets' ),
-				'type' => \Elementor\Controls_Manager::MEDIA,
-				'default' => [
-					'url' => \Elementor\Utils::get_placeholder_image_src(),
-				],
-			]
-		);
-
-		$this->end_controls_section();
-
-		$this->start_controls_section(
-			'section_caption',
-			[
-				'label' => __( 'Caption', 'elementor-advanced-widgets' ),
-			]
-		);
-
-		$this->add_control(
-			'caption',
-			[
-				'label' => __( 'Text', 'elementor-advanced-widgets' ),
-				'type' => Controls_Manager::TEXT,
-				'default' => __( 'Case Study', 'elementor-advanced-widgets' ),
-			]
-		);
-
-		$this->add_control(
-			'show_caption',
-			[
-				'label' => __( 'Show Caption', 'elementor-advanced-widgets' ),
-				'type' => \Elementor\Controls_Manager::SWITCHER,
-				'label_on' => __( 'Show', 'elementor-advanced-widgets' ),
-				'label_off' => __( 'Hide', 'elementor-advanced-widgets' ),
-				'return_value' => 'yes',
-				'default' => 'yes',
 			]
 		);
 
@@ -226,7 +185,7 @@ class Portfolio_Item extends Widget_Base {
 		$this->add_control(
 			'link',
 			[
-				'label' => __( 'Link', 'plugin-domain' ),
+				'label' => __( 'Link', 'elementor-advanced-widgets' ),
 				'type' => \Elementor\Controls_Manager::URL,
 				'placeholder' => __( 'https://your-link.com', 'elementor-advanced-widgets' ),
 				'show_external' => true,
@@ -267,7 +226,7 @@ class Portfolio_Item extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#000000',
 				'selectors' => [
-					'{{WRAPPER}} .c-excerpt__headline' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .portfolio-item-copy__title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -277,7 +236,7 @@ class Portfolio_Item extends Widget_Base {
         [
             'name'                  => 'title_typography',
             'label'                 => esc_html__( 'Typography', 'elementor-advanced-widgets' ),
-            'selector'              => '{{WRAPPER}} .c-excerpt__headline',
+            'selector'              => '{{WRAPPER}} .portfolio-item-copy__title',
 						'default' 							=> "'Open Sans', sans-serif",
         ]
     );
@@ -298,7 +257,7 @@ class Portfolio_Item extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '#272727',
 				'selectors' => [
-					'{{WRAPPER}} .c-media__description' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .portfolio-item-copy__description' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -308,7 +267,7 @@ class Portfolio_Item extends Widget_Base {
         [
             'name'                  => 'description_typography',
             'label'                 => esc_html__( 'Typography', 'elementor-advanced-widgets' ),
-            'selector'              => '{{WRAPPER}} .c-media__description',
+            'selector'              => '{{WRAPPER}} .portfolio-item-copy__description',
 						'default' 							=> "'Open Sans', sans-serif",
         ]
     );
@@ -327,9 +286,6 @@ class Portfolio_Item extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-
-		$this->add_inline_editing_attributes( 'caption', 'none' );
-		$this->add_render_attribute( 'caption', 'class', 'c-excerpt__caption' );
 
 		$this->add_inline_editing_attributes( 'headline', 'basic' );
 
@@ -356,11 +312,15 @@ class Portfolio_Item extends Widget_Base {
 			</div>
 
 			<div class="portfolio-item-copy">
+				<div class="portfolio-item-copy__title">
 					<?php
 						$title_html = sprintf( '<%1$s %2$s>%3$s</%1$s>', $settings['headline_tag'], $this->get_render_attribute_string( 'headline' ), $settings['headline'] );
 						echo $title_html;
 					?>
-				<?php echo $settings['description']; ?>
+				</div>
+				<div class="portfolio-item-copy__description">
+					<?php echo $settings['description']; ?>
+				</div>
 				<a href="<?php echo $settings['link']['url']; ?>" <?php echo $target .  $nofollow ?> <?php echo $this->get_render_attribute_string( 'button_text' ); ?>>
 					<?php echo $settings['button_text']; ?>
 				</a>
@@ -381,7 +341,6 @@ class Portfolio_Item extends Widget_Base {
 	protected function _content_template() {
 		?>
 		<#
-		view.addInlineEditingAttributes( 'caption', 'none' );
 		view.addInlineEditingAttributes( 'headline', 'basic' );
 		view.addInlineEditingAttributes( 'description', 'basic' );
 		view.addInlineEditingAttributes( 'href', 'none' );
@@ -400,14 +359,16 @@ class Portfolio_Item extends Widget_Base {
 			</div>
 
 			<div class="portfolio-item-copy">
-				<h2>
+				<div class="portfolio-item-copy__title">
 					<#
 						var title_html = '<' + settings.headline_tag  + ' ' + view.getRenderAttributeString( 'headline' ) + '>' + settings.headline + '</' + settings.headline_tag + '>';
 
 						print( title_html );
 					#>
-				</h2>
-				<p {{{ view.getRenderAttributeString( 'description' ) }}}>{{{ settings.description }}}</p>
+				</div>
+				<div class="portfolio-item-copy__description">
+					{{{ view.getRenderAttributeString( 'description' ) }}}>{{{ settings.description }}}
+				</div>
 				<a href="{{ settings.link.url }}"{{ target }}{{ nofollow }} class="button">
 					{{{ settings.button_text }}}
 				</a>
