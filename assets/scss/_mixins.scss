@@ -1,0 +1,22 @@
+$breakpoint-mobile: 480px;
+$breakpoint-desktop: 768px;
+$color-primary: #5722CD;
+$color-secondary: #ED4385;
+
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 481px) and (max-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}

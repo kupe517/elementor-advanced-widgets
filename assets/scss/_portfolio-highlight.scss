@@ -1,0 +1,61 @@
+.portfolio-highlight {
+	display: inline-grid;
+	grid-template-columns: 7fr 2fr 1fr;
+	grid-template-rows: 3fr 6fr;
+	padding: 5%;
+	//max-height: 48vh;
+	&__desktop {
+		grid-column: 1 / 3;
+		grid-row: 1 / 3;
+
+		img {
+			width: 100%;
+			height: auto;
+			box-shadow: 0 30px 20px -10px rgba(0,0,0,0.15);
+			transition: box-shadow 0.3s ease-in;
+		}
+	}
+
+	&__mobile {
+		grid-column: 2 / 4;
+		grid-row: 2 / 4;
+		z-index: 10;
+		position: relative;
+		padding: 5%;
+
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			background-image: url("https://i.ibb.co/wYx6Zg4/i-Phone-X-Frame.png");
+			background-repeat: no-repeat;
+			background-size: contain;
+		}
+
+		img {
+			width: 100%;
+			height: auto;
+		}
+	}
+}
+@include desktop {
+	.portfolio-highlight {
+		grid-template-columns: 7fr 2fr 1fr;
+		grid-template-rows: 3fr 5fr 1fr;
+
+		&__desktop {
+			img {
+				box-shadow: 0 70px 50px -20px rgba(0,0,0,0.15);
+			}
+		}
+
+		&__mobile {
+			img {
+				border-radius: 20px;
+			}
+		}
+	}
+}

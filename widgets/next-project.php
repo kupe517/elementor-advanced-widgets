@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * @since 1.1.0
  */
-class Portfolio_Item extends Widget_Base {
+class Next_Project extends Widget_Base {
 
 	/**
 	 * Retrieve the widget name.
@@ -22,7 +22,7 @@ class Portfolio_Item extends Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'portfolio_item';
+		return 'Next_Project';
 	}
 
 	/**
@@ -35,7 +35,7 @@ class Portfolio_Item extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Portfolio Item', 'elementor-advanced-widgets' );
+		return __( 'Next Project', 'elementor-advanced-widgets' );
 	}
 
 	/**
@@ -48,7 +48,7 @@ class Portfolio_Item extends Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-image-box';
+		return 'eicon-call-to-action';
 	}
 
 	/**
@@ -79,45 +79,6 @@ class Portfolio_Item extends Widget_Base {
 	 * @access protected
 	 */
 	protected function _register_controls() {
-		$this->start_controls_section(
-			'section_images',
-			[
-				'label' => __( 'Images', 'elementor-advanced-widgets' ),
-			]
-		);
-
-		$this->add_responsive_control(
-			'align',
-			[
-				'label' => __( 'Photo Alignment', 'elementor-advanced-widgets' ),
-				'type' => Controls_Manager::CHOOSE,
-				'options' => [
-					'left'    => [
-						'title' => __( 'Left', 'elementor-advanced-widgets' ),
-						'icon' => 'fa fa-align-left',
-					],
-					'right' => [
-						'title' => __( 'Right', 'elementor-advanced-widgets' ),
-						'icon' => 'fa fa-align-right',
-					],
-				],
-				'prefix_class' => 'portfolio-item%s-align-',
-				'default' => '',
-			]
-		);
-
-		$this->add_control(
-			'primary_image',
-			[
-				'label' => __( 'Primary Image', 'elementor-advanced-widgets' ),
-				'type' => \Elementor\Controls_Manager::MEDIA,
-				'default' => [
-					'url' => \Elementor\Utils::get_placeholder_image_src(),
-				],
-			]
-		);
-
-		$this->end_controls_section();
 
 		$this->start_controls_section(
 			'section_headline',
@@ -197,15 +158,6 @@ class Portfolio_Item extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'button_text',
-			[
-				'label' => __( 'Button Text', 'elementor-advanced-widgets' ),
-				'type' => Controls_Manager::TEXT,
-				'default' => __( 'Button Text', 'elementor-advanced-widgets' ),
-			]
-		);
-
 		$this->end_controls_section();
 
 		/*-----------------------------------------------------------------------------------*/
@@ -213,20 +165,20 @@ class Portfolio_Item extends Widget_Base {
         /*-----------------------------------------------------------------------------------*/
 
 		$this->start_controls_section(
-			'section_Portfolio_Items_styles_general',
+			'section_Next_Projects_styles_general',
 			[
 				'label' => esc_html__( 'Title', 'elementor-advanced-widgets' ),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
 		$this->add_control(
-			'Portfolio_Item_title_color',
+			'Next_Project_title_color',
 			[
 				'label' => esc_html__( 'Title Color', 'elementor-advanced-widgets' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#000000',
+				'default' => '#ffffff',
 				'selectors' => [
-					'{{WRAPPER}} .portfolio-item-copy__title' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .next-project__info-title' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -236,28 +188,28 @@ class Portfolio_Item extends Widget_Base {
         [
             'name'                  => 'title_typography',
             'label'                 => esc_html__( 'Typography', 'elementor-advanced-widgets' ),
-            'selector'              => '{{WRAPPER}} .portfolio-item-copy__title',
-						'default' 							=> "'Open Sans', sans-serif",
+            'selector'              => '{{WRAPPER}} .next-project__info-title',
+						'default' 							=> "'Poppins', sans-serif",
         ]
     );
 
 		$this->end_controls_section();
 
 		$this->start_controls_section(
-			'section_Portfolio_Items_styles_description',
+			'section_Next_Projects_styles_description',
 			[
 				'label' => esc_html__( 'Description', 'elementor-advanced-widgets' ),
 				'tab' => Controls_Manager::TAB_STYLE
 			]
 		);
 		$this->add_control(
-			'Portfolio_Item_description_color',
+			'Next_Project_description_color',
 			[
 				'label' => esc_html__( 'Description Color', 'elementor-advanced-widgets' ),
 				'type' => Controls_Manager::COLOR,
-				'default' => '#272727',
+				'default' => '#ffffff',
 				'selectors' => [
-					'{{WRAPPER}} .portfolio-item-copy__description' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .next-project__info-description' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -267,8 +219,8 @@ class Portfolio_Item extends Widget_Base {
         [
             'name'                  => 'description_typography',
             'label'                 => esc_html__( 'Typography', 'elementor-advanced-widgets' ),
-            'selector'              => '{{WRAPPER}} .portfolio-item-copy__description',
-						'default' 							=> "'Open Sans', sans-serif",
+            'selector'              => '{{WRAPPER}} .next-project__info-description',
+						'default' 							=> "'Poppins', sans-serif",
         ]
     );
 
@@ -287,46 +239,53 @@ class Portfolio_Item extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		$this->add_render_attribute( 'reveal', 'class', 'reveal' );
 
 		$this->add_inline_editing_attributes( 'headline', 'basic' );
 
 		$this->add_inline_editing_attributes( 'description', 'basic' );
-		$this->add_render_attribute( 'description', 'class', 'portfolio-item-copy__description' );
+		$this->add_render_attribute( 'description', 'class', 'next-project__info-description' );
 
 		$this->add_inline_editing_attributes( 'href', 'none' );
-
-		$this->add_inline_editing_attributes( 'button_text', 'none' );
-		$this->add_render_attribute( 'button_text', 'class', 'button' );
 
 		$target = $settings['link']['is_external'] ? ' target="_blank"' : '';
 		$nofollow = $settings['link']['nofollow'] ? ' rel="nofollow"' : '';
 		?>
 
-		<div class="portfolio-item reveal">
-			<div class="portfolio-item-content">
-				<div class="portfolio-item-content__bg" data-parallax='{"y" : -100}'></div>
-				<div class="portfolio-item-content__image">
-					<a href="<?php echo $settings['link']['url']; ?>" <?php echo $target .  $nofollow ?> class="c-media__primary">
-						<img src="<?php echo $settings['primary_image']['url']; ?>">
-					</a>
+		<div class="next-project">
+
+			<div class="next-project--content">
+
+				<div class="next-project__header">
+					<span>Next Project</span>
 				</div>
+
+				<div class="next-project__info">
+					<div class="next-project__info--container">
+						<div class="next-project__info-title">
+							<?php
+								$title_html = sprintf( '<%1$s %2$s>%3$s</%1$s>', $settings['headline_tag'], $this->get_render_attribute_string( 'headline' ), $settings['headline'] );
+								echo $title_html;
+							?>
+						</div>
+						<?php echo $settings['description']; ?>
+					</div>
+				</div>
+
+				<div class="next-project__cta">
+					<div class="next-project__cta-button">
+						<a href="<?php echo $settings['link']['url']; ?>" <?php echo $target .  $nofollow ?>>
+							<svg xmlns="http://www.w3.org/2000/svg" width="57" height="57" viewBox="0 0 57 57">
+								<g fill="none" fill-rule="evenodd" transform="translate(2.3 2.23)">
+									<circle cx="26.218" cy="26.236" r="26.124" stroke="#FFF" stroke-width="3" />
+									<polygon fill="#FFF" points="24.402 17.16 22.289 19.274 29.148 26.133 22.289 32.992 24.402 35.105 33.375 26.133" />
+								</g>
+							</svg>
+						</a>
+					</div>
+				</div>
+
 			</div>
 
-			<div class="portfolio-item-copy">
-				<div class="portfolio-item-copy__title">
-					<?php
-						$title_html = sprintf( '<%1$s %2$s>%3$s</%1$s>', $settings['headline_tag'], $this->get_render_attribute_string( 'headline' ), $settings['headline'] );
-						echo $title_html;
-					?>
-				</div>
-				<div <?php echo $this->get_render_attribute_string( 'description' ); ?>>
-					<?php echo $settings['description']; ?>
-				</div>
-				<a href="<?php echo $settings['link']['url']; ?>" <?php echo $target .  $nofollow ?> <?php echo $this->get_render_attribute_string( 'button_text' ); ?>>
-					<?php echo $settings['button_text']; ?>
-				</a>
-			</div>
 		</div>
 		<?php
 	}
@@ -346,35 +305,44 @@ class Portfolio_Item extends Widget_Base {
 		view.addInlineEditingAttributes( 'headline', 'basic' );
 		view.addInlineEditingAttributes( 'description', 'basic' );
 		view.addInlineEditingAttributes( 'href', 'none' );
-		view.addInlineEditingAttributes( 'button_text', 'none' );
 		var target = settings.link.is_external ? ' target="_blank"' : '';
 		var nofollow = settings.link.nofollow ? ' rel="nofollow"' : '';
 		#>
-		<div class="portfolio-item">
-			<div class="portfolio-item-content">
-				<div class="portfolio-item-content__bg" data-parallax='{"y" : -100}'></div>
-				<div class="portfolio-item-content__image">
-					<a href="{{ settings.link.url }}"{{ target }}{{ nofollow }} class="c-media__primary">
-						<img src="{{{ settings.primary_image.url }}}">
-					</a>
-				</div>
-			</div>
 
-			<div class="portfolio-item-copy">
-				<div class="portfolio-item-copy__title">
-					<#
-						var title_html = '<' + settings.headline_tag  + ' ' + view.getRenderAttributeString( 'headline' ) + '>' + settings.headline + '</' + settings.headline_tag + '>';
+		<div class="next-project">
 
-						print( title_html );
-					#>
+			<div class="next-project--content">
+
+				<div class="next-project__header">
+					<span>Next Project</span>
 				</div>
-				<div class="portfolio-item-copy__description">
+
+				<div class="next-project__info">
+					<div class="next-project__info-title">
+						<#
+							var title_html = '<' + settings.headline_tag  + ' ' + view.getRenderAttributeString( 'headline' ) + '>' + settings.headline + '</' + settings.headline_tag + '>';
+
+							print( title_html );
+						#>
+					</div>
 					<div {{{ view.getRenderAttributeString( 'description' ) }}}>{{{ settings.description }}}</div>
 				</div>
-				<a href="{{ settings.link.url }}"{{ target }}{{ nofollow }} class="button">
-					{{{ settings.button_text }}}
-				</a>
+
+				<div class="next-project__cta">
+					<div class="next-project__cta-button">
+						<a href="{{ settings.link.url }}"{{ target }}{{ nofollow }}>
+							<svg xmlns="http://www.w3.org/2000/svg" width="57" height="57" viewBox="0 0 57 57">
+								<g fill="none" fill-rule="evenodd" transform="translate(2.3 2.23)">
+									<circle cx="26.218" cy="26.236" r="26.124" stroke="#FFF" stroke-width="3" />
+									<polygon fill="#FFF" points="24.402 17.16 22.289 19.274 29.148 26.133 22.289 32.992 24.402 35.105 33.375 26.133" />
+								</g>
+							</svg>
+						</a>
+					</div>
+				</div>
+
 			</div>
+
 		</div>
 		<?php
 	}

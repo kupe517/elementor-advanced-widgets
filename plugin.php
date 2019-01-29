@@ -58,10 +58,10 @@ class Plugin {
 	 * @access private
 	 */
 	private function include_widgets_files() {
-		require_once( __DIR__ . '/widgets/hello-world.php' );
-		require_once( __DIR__ . '/widgets/inline-editing.php' );
-		require_once( __DIR__ . '/widgets/team-member.php' );
 		require_once( __DIR__ . '/widgets/portfolio-item.php' );
+		require_once( __DIR__ . '/widgets/portfolio-highlight.php' );
+		require_once( __DIR__ . '/widgets/responsive-image.php' );
+		require_once( __DIR__ . '/widgets/next-project.php' );
 	}
 
 	/**
@@ -77,10 +77,10 @@ class Plugin {
 		$this->include_widgets_files();
 
 		// Register Widgets
-		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Hello_World() );
-		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Inline_Editing() );
-		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Team_Member() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Portfolio_Item() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Portfolio_Highlight() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Responsive_Image() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Widgets\Next_Project() );
 	}
 
 	public function widget_styles() {
